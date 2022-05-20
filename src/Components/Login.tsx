@@ -1,33 +1,23 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Alert, Button, Form } from "react-bootstrap";
 import { useRef } from "react";
-require('dotenv').config()
-console.log(process.env)
+import { BlogContext } from "../Context/BlogContext";
+import { useLocation, useNavigate } from "react-router-dom";
+
 
 
 export function Login() {
-
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [classToggle, setClassToggle] = useState<boolean | null>(null);
     const emailField = useRef<any>("");
     const passwordField = useRef<any>("");
     const [show, setShow] = useState(false);
+    const [pass, setPass] = useState(false);
+    const { authenticated, loginUser } = useContext(BlogContext);
+    let location : any = useLocation();
+    let from = location.state?.from?.pathname || "/";
+    let navigate = useNavigate();
 
-    function AlertDismissibleExample() {
+  
         
-        if (show) {
-          return (
-            <Alert variant="danger" onClose={() => setShow(false)} dismissible>
-              <Alert.Heading>Oh snap! You didn't enter an email or password!</Alert.Heading>
-              <p>
-                Please enter both your email and password. Thanks!
-              </p>
-            </Alert>
-          );
-        }
-        return <Button onClick={() => setShow(true)}>Show Alert</Button>;
-      }
   
 
     function handleClick(e: any) {
@@ -35,11 +25,21 @@ export function Login() {
         if (emailField.current.value.length === 0 || passwordField.current.value.length === 0) {
             setShow(true);
         } else {
-            
+
             setShow(false);
+            
             console.log(emailField.current.value, passwordField.current.value);
-            setEmail('');
-            setPassword('');  
+            if (process.env.REACT_APP_EMAIL === emailField.current.value && process.env.REACT_APP_PASSWORD === passwordField.current.value) {
+                loginUser();
+                setPass(false);
+                navigate(from, { replace: true });
+            }
+
+            else {
+                setPass(true);
+            }
+
+         
         }
     }
 
@@ -68,7 +68,28 @@ export function Login() {
                
             </Form>
 
-            <AlertDismissibleExample/>
+            { show &&
+                <Alert variant="danger">
+                    <Alert.Heading>Oh snap! You didn't enter an email or password!</Alert.Heading>
+                    <p>
+                        Please enter both your email and password. Thanks!
+                    </p>
+                </Alert>
+            }
+            
+            { pass && <Alert variant="danger">
+              <Alert.Heading>Oh snap! You didn't enter a valid email or password!</Alert.Heading>
+              <p>
+                Please enter a valid email and password. Thanks!
+              </p>
+            </Alert>}
+            
+            { authenticated && <Alert variant="success">
+              <Alert.Heading>You are logged in!</Alert.Heading>
+              <p>
+                Feel free to browse this website.
+              </p>
+            </Alert> }
 
         </div>
     
