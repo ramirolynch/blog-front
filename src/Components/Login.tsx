@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Alert, Button, Form } from "react-bootstrap";
-import { useRef} from "react";
+import { useRef } from "react";
+require('dotenv').config()
+console.log(process.env)
 
 
 export function Login() {
@@ -36,13 +38,10 @@ export function Login() {
             
             setShow(false);
             console.log(emailField.current.value, passwordField.current.value);
-    
             setEmail('');
-            setPassword('');
-       
+            setPassword('');  
         }
     }
-
 
     
     return (
