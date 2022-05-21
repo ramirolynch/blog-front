@@ -8,12 +8,14 @@ import { Post } from './Components/Post';
 import { RequireAuth } from './Components/RequireAuth';
 import { PostList } from './Components/PostList';
 import { SinglePost } from './Components/SinglePost';
+import { Navigation } from './Components/Navigation';
 
 
 function App() {
 
   return (
     <div className="App">
+      <Navigation></Navigation>
 
 
       <Routes>
