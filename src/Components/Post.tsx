@@ -1,6 +1,7 @@
 import { Card, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { BlogPost } from "../Models/UserModel";
+import moment from "moment";
 
 export function Post(props: { elem: BlogPost }) {
 
@@ -9,11 +10,14 @@ export function Post(props: { elem: BlogPost }) {
     return (
         <div>
             <Card className="mt-3">
-                <Card.Header as="h5">Featured</Card.Header>
+                <Card.Header as="h5">{moment(props.elem.post_ts).format("MMM Do YY")}</Card.Header>
                 <Card.Body>
                     <Card.Title>{props.elem.title}</Card.Title>
                     <Card.Text>
                     {props.elem.body}
+                    </Card.Text>
+                    <Card.Text>
+                    posted by {props.elem.first_name} {props.elem.last_name}
                     </Card.Text>
                     <Button variant="primary" onClick={()=>{navigate(`posts/${props.elem.id}`)}}>Go to post</Button>
                 </Card.Body>

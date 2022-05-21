@@ -21,7 +21,7 @@ export function PostList() {
     return (
         <div>
         
-                {posts.length > 0 ? posts.map((elem, i) => <Post key={i} elem={elem}></Post>) : <h3>No Posts Were Found.</h3>}
+                {posts.length > 0 ? posts.map((elem, i) => <Post key={i} elem={elem}></Post>) : <h3>Loading...</h3>}
             
 
         </div>

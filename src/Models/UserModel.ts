@@ -12,4 +12,8 @@ export interface BlogPost {
   body: string;
   post_ts: string;
   author_id: number;
+  first_name: string;
+  last_name: string;
+  admin: boolean;
+  email: string;
 }
