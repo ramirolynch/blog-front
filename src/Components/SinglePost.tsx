@@ -19,7 +19,7 @@ export function SinglePost() {
 
     return (
         <div>
-            <Card>
+            <Card className="mt-3">
                 <Card.Header as="h5">Featured</Card.Header>
                 <Card.Body>
                     <Card.Title>{onePost?.title}</Card.Title>

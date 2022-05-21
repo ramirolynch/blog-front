@@ -11,3 +11,15 @@ export function fetchPost(id: number) {
     .get(`http://localhost:3000/posts/${id}`, {})
     .then((response) => response.data);
 }
+
+export function postBlog(title: string, body: number) {
+  let blogpost = {
+    ...(title !== "" && { title: title }),
+    ...{ body: body },
+    ...{ author_id: 1 },
+  };
+  return axios
+    .post(`http://localhost:3000/posts`, blogpost)
+    .then((response) => response.data)
+    .catch((error) => console.log(error.response.data));
+}

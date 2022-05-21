@@ -8,7 +8,7 @@ export function Post(props: { elem: BlogPost }) {
 
     return (
         <div>
-            <Card>
+            <Card className="mt-3">
                 <Card.Header as="h5">Featured</Card.Header>
                 <Card.Body>
                     <Card.Title>{props.elem.title}</Card.Title>
