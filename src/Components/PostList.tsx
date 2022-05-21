@@ -1,13 +1,14 @@
 import { Key, Suspense, useContext, useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { BlogContext } from "../Context/BlogContext";
+import { BlogPost } from "../Models/UserModel";
 import { fetchPosts } from "../Services/BlogApi";
 import { Post } from "./Post"
 
 
 export function PostList() {
    
-    const [posts, setPosts] = useState<any[]>([]);
+    const [posts, setPosts] = useState<BlogPost[]>([]);
     
 
     useEffect(() => {

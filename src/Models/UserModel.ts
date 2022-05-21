@@ -17,3 +17,14 @@ export interface BlogPost {
   admin: boolean;
   email: string;
 }
+
+export interface CommentFace {
+  id: number;
+  body: string;
+  comment_ts: string;
+  author_id: number;
+  post_id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+}

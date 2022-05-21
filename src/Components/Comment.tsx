@@ -1,19 +1,20 @@
+import moment from "moment";
 import { Card } from "react-bootstrap";
+import { CommentFace } from "../Models/UserModel";
 
-export function Comment() {
+
+export function Comment(props:{elem:CommentFace}) {
     return (
         <div>
             <Card>
-                <Card.Header>Quote</Card.Header>
+                <Card.Header>{moment(props.elem.comment_ts).format("MMM Do YY")}</Card.Header>
                     <Card.Body>
                         <blockquote className="blockquote mb-0">
                         <p>
-                            {' '}
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
-                            erat a ante.{' '}
+                           {props.elem.body}
                         </p>
                         <footer className="blockquote-footer">
-                            Someone famous in <cite title="Source Title">Source Title</cite>
+                            by <cite title="Source Title">{props.elem.first_name} {props.elem.last_name}</cite>
                         </footer>
                         </blockquote>
                     </Card.Body>

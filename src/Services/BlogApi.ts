@@ -12,6 +12,12 @@ export function fetchPost(id: number) {
     .then((response) => response.data);
 }
 
+export function fetchComments(id: number) {
+  return axios
+    .get(`http://localhost:3000/posts/${id}/comments`, {})
+    .then((response) => response.data);
+}
+
 export function postBlog(title: string, body: number) {
   let blogpost = {
     ...(title !== "" && { title: title }),

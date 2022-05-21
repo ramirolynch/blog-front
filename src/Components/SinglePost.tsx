@@ -2,21 +2,24 @@ import moment from "moment";
 import { Suspense, useEffect, useState } from "react";
 import { Card, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { BlogPost } from "../Models/UserModel";
-import { fetchPost } from "../Services/BlogApi";
+import { BlogPost, CommentFace } from "../Models/UserModel";
+import { fetchComments, fetchPost } from "../Services/BlogApi";
+import { Comment } from "./Comment";
 
 
 export function SinglePost() {
 
     const [onePost, setOnePost] = useState<BlogPost>();
+    const [comments, setComments] = useState<CommentFace[]>([]);
 
     let { id } = useParams();
 
 
     useEffect(() => {
-        fetchPost(Number(id)).then((response) => setOnePost(response))
+        fetchPost(Number(id)).then((response) => setOnePost(response));
+        fetchComments((Number(id))).then((response) => setComments(response))
         
-    }, [onePost]);
+    }, [onePost, comments]);
 
     return (
         <div>
@@ -29,6 +32,7 @@ export function SinglePost() {
                     </Card.Text>
                 </Card.Body>
             </Card>
+            {comments.length > 0 ? comments.map((elem, i) => <Comment key={i} elem={elem}></Comment>) : <h3>Enter a new comment.</h3>}
         </div>
         
     );
