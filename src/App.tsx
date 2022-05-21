@@ -9,6 +9,7 @@ import { RequireAuth } from './Components/RequireAuth';
 import { PostList } from './Components/PostList';
 import { SinglePost } from './Components/SinglePost';
 import { Navigation } from './Components/Navigation';
+import { PostForm } from './Components/PostForm';
 
 
 function App() {
@@ -24,7 +25,8 @@ function App() {
         <Route path="login" element={<Login></Login>}></Route>
         <Route path='/' element={<PostList />}></Route>
       
-        <Route path="/posts/:id" element={<SinglePost/>}></Route>
+        <Route path="/posts/:id" element={<SinglePost />}></Route>
+        <Route path='/post' element={<PostForm />}></Route>
   
       </Routes>
       

@@ -1,4 +1,5 @@
-import { Key, useContext, useEffect, useState } from "react";
+import { Key, Suspense, useContext, useEffect, useState } from "react";
+import { Spinner } from "react-bootstrap";
 import { BlogContext } from "../Context/BlogContext";
 import { fetchPosts } from "../Services/BlogApi";
 import { Post } from "./Post"
@@ -19,8 +20,9 @@ export function PostList() {
 
     return (
         <div>
-
-            {posts.length > 0 ? posts.map((elem, i) => <Post key={i} elem={elem}></Post>) : <h3>No Posts Were Found.</h3>}
+        
+                {posts.length > 0 ? posts.map((elem, i) => <Post key={i} elem={elem}></Post>) : <h3>No Posts Were Found.</h3>}
+            
 
         </div>
 
