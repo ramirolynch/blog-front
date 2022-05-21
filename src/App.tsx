@@ -6,8 +6,12 @@ import { Routes, Route } from 'react-router-dom';
 import { Login } from './Components/Login';
 import { Post } from './Components/Post';
 import { RequireAuth } from './Components/RequireAuth';
+import { PostList } from './Components/PostList';
+import { SinglePost } from './Components/SinglePost';
+
 
 function App() {
+
   return (
     <div className="App">
 
@@ -16,7 +20,9 @@ function App() {
 
   
         <Route path="login" element={<Login></Login>}></Route>
-        <Route path='/' element={<RequireAuth><Post/></RequireAuth>}></Route>
+        <Route path='/' element={<PostList />}></Route>
+      
+        <Route path="/posts/:id" element={<SinglePost/>}></Route>
   
       </Routes>
       

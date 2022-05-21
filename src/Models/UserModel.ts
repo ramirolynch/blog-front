@@ -5,3 +5,11 @@ export interface User {
   email: string;
   password: string;
 }
+
+export interface BlogPost {
+  id: number;
+  title: string;
+  body: string;
+  post_ts: string;
+  author_id: number;
+}
