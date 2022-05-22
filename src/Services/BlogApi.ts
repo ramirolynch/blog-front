@@ -29,3 +29,17 @@ export function postBlog(title: string, body: number) {
     .then((response) => response.data)
     .catch((error) => console.log(error.response.data));
 }
+
+// post a comment under a post
+
+export function postComment(body: string, author_id: number, post_id: number) {
+  let comment = {
+    ...{ body: body },
+    ...{ author_id: author_id },
+    ...{ post_id: post_id },
+  };
+  return axios
+    .post(`http://localhost:3000/posts/${post_id}/comments`, comment)
+    .then((response) => response.data)
+    .catch((error) => console.log(error.response.data));
+}
