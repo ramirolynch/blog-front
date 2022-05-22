@@ -3,6 +3,7 @@ import { Alert, Button, Form } from "react-bootstrap";
 import { useRef } from "react";
 import { BlogContext } from "../Context/BlogContext";
 import { useLocation, useNavigate } from "react-router-dom";
+import { logInDB } from "../Services/BlogApi";
 
 
 
@@ -11,7 +12,7 @@ export function Login() {
     const passwordField = useRef<any>("");
     const [show, setShow] = useState(false);
     const [pass, setPass] = useState(false);
-    const { authenticated, loginUser } = useContext(BlogContext);
+    const { authenticated, loginUser, addUserId } = useContext(BlogContext);
     let location : any = useLocation();
     let from = location.state?.from?.pathname || "/";
     let navigate = useNavigate();
@@ -26,20 +27,13 @@ export function Login() {
             setShow(true);
         } else {
 
-            setShow(false);
-            
-            console.log(emailField.current.value, passwordField.current.value);
-            if (process.env.REACT_APP_EMAIL === emailField.current.value && process.env.REACT_APP_PASSWORD === passwordField.current.value) {
-                loginUser();
-                setPass(false);
-                navigate(from, { replace: true });
-            }
+        setShow(false);  
 
-            else {
-                setPass(true);
-            }
+        loginUser();
+        logInDB(emailField.current.value, passwordField.current.value).then(response => addUserId(response.id)).catch(error => console.log(error));
+        setPass(false);
+        navigate(from, { replace: true });
 
-         
         }
     }
 
@@ -69,7 +63,8 @@ export function Login() {
             </Form>
 
             { show &&
-                <Alert variant="danger">
+                <Alert variant="danger" onClose={()=> setShow(false)} dismissible>
+        
                     <Alert.Heading>Oh snap! You didn't enter an email or password!</Alert.Heading>
                     <p>
                         Please enter both your email and password. Thanks!
@@ -77,7 +72,7 @@ export function Login() {
                 </Alert>
             }
             
-            { pass && <Alert variant="danger">
+            { pass && <Alert variant="danger" onClose={()=> setPass(false)} dismissible>
               <Alert.Heading>Oh snap! You didn't enter a valid email or password!</Alert.Heading>
               <p>
                 Please enter a valid email and password. Thanks!

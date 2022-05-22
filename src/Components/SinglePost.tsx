@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { BlogPost, CommentFace } from "../Models/UserModel";
 import { fetchComments, fetchPost } from "../Services/BlogApi";
 import { Comment } from "./Comment";
+import { CommentForm } from "./CommentForm";
 
 
 export function SinglePost() {
@@ -32,6 +33,9 @@ export function SinglePost() {
                     </Card.Text>
                 </Card.Body>
             </Card>
+            
+            {onePost && <CommentForm elem={onePost}></CommentForm>}
+
             {comments.length > 0 ? comments.map((elem, i) => <Comment key={i} elem={elem}></Comment>) : <h3>Enter a new comment.</h3>}
         </div>
         

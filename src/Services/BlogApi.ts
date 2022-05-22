@@ -43,3 +43,12 @@ export function postComment(body: string, author_id: number, post_id: number) {
     .then((response) => response.data)
     .catch((error) => console.log(error.response.data));
 }
+
+export function logInDB(email: string, password: string) {
+  return axios
+    .post(`http://localhost:3000/login`, {
+      email: email,
+      password: password,
+    })
+    .then((response) => response.data);
+}

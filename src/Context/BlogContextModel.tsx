@@ -15,13 +15,20 @@ export function BlogContextProvider({ children }: Props) {
     const initialValue = saved === "true" ? true : false;
     return initialValue;
   });
+    
+  const [user_id, setUserId] = useState<number>(() => {
+    const saved = localStorage.getItem("userId");
+    const initialValue = Number(saved);
+    return initialValue;
+  });
 
 
   useEffect(() => {
  
-    localStorage.setItem("userLogin", JSON.stringify(authenticated));
+      localStorage.setItem("userLogin", JSON.stringify(authenticated));
+      localStorage.setItem("userId", JSON.stringify(user_id));
   
-  }, [authenticated]);
+  }, [authenticated,user_id]);
 
 
   function loginUser() {
@@ -31,13 +38,19 @@ export function BlogContextProvider({ children }: Props) {
   function logoutUser() {
     setAuth(false);
   }
+    
+  function addUserId(num:number) {
+    setUserId(num);
+  }
 
 
 
 
   return (
     <BlogContext.Provider
-      value={{  
+        value={{
+        user_id,
+        addUserId,
         authenticated,
         loginUser,
         logoutUser,
