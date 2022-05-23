@@ -18,11 +18,11 @@ export function fetchComments(id: number) {
     .then((response) => response.data);
 }
 
-export function postBlog(title: string, body: number) {
+export function postBlog(title: string, body: number, author_id: number) {
   let blogpost = {
     ...(title !== "" && { title: title }),
     ...{ body: body },
-    ...{ author_id: 1 },
+    ...{ author_id: author_id },
   };
   return axios
     .post(`http://localhost:3000/posts`, blogpost)

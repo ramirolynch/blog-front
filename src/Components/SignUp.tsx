@@ -12,11 +12,12 @@ export function SignUp() {
     const lastNameField = useRef<any>("");
     const emailField = useRef<any>("");
     const passwordField = useRef<any>("");
-    const passwordRepeateField = useRef<any>("");
+    const passwordRepeatField = useRef<any>("");
     const [show, setShow] = useState(false);
     const [strLength, setStrLength] = useState(false);
+    const [pwMatch, setPwMatch] = useState(false);
     const [pass, setPass] = useState(false);
-    const { authenticated, loginUser, addUserId } = useContext(BlogContext);
+    const { loginUser, addUserId } = useContext(BlogContext);
     let location : any = useLocation();
     let from = location.state?.from?.pathname || "/";
     let navigate = useNavigate();
@@ -32,21 +33,26 @@ export function SignUp() {
         } else if (emailField.current.value.length < 8 || passwordField.current.value.length < 8) {
             setStrLength(true)
 
+        }
+        else if (passwordField.current.value !== passwordRepeatField.current.value) {
+            setPwMatch(true)
 
         }
             else {
-                setShow(false);  
-                loginUser();
-                signUpDB(firstNameField.current.value, lastNameField.current.value,emailField.current.value, passwordField.current.value).then(response => addUserId(response.id)).catch(error => console.log(error));
-                setPass(false);
-                navigate(from, { replace: true });
+            setShow(false); 
+            setPass(false);
+            setStrLength(false);
+            setPwMatch(false);
+            loginUser();
+            signUpDB(firstNameField.current.value, lastNameField.current.value, emailField.current.value, passwordField.current.value).then(response => addUserId(response.id)).catch(error => console.log(error));
+            navigate(from, { replace: true });
             }
     }
 
   return (
       <div>
           {/* first name */}
-          <Form>
+          <Form className="mt-3">
             <Form.Group className="mb-3" controlId="formFirstName">
             <Form.Label>First Name</Form.Label>
             <Form.Control ref={firstNameField} type="text" placeholder="Enter First Name" />
@@ -80,7 +86,7 @@ export function SignUp() {
         
         <Form.Group className="mb-3" controlId="formRepeatPassword">
             <Form.Label>Type Your Password Again</Form.Label>
-            <Form.Control ref={passwordRepeateField} type="password" placeholder="Type your Password Again" />
+            <Form.Control ref={passwordRepeatField} type="password" placeholder="Type your Password Again" />
         </Form.Group>
 
         <Button onClick={handleClick} variant="primary" type="submit">
@@ -90,7 +96,7 @@ export function SignUp() {
     </Form>
 
     { show &&
-        <Alert variant="danger" onClose={()=> setShow(false)} dismissible>
+        <Alert className="mt-3" variant="danger" onClose={()=> setShow(false)} dismissible>
 
             <Alert.Heading>Oh snap! You didn't enter an email or password!</Alert.Heading>
             <p>
@@ -99,26 +105,26 @@ export function SignUp() {
         </Alert>
     }
     
-    { pass && <Alert variant="danger" onClose={()=> setPass(false)} dismissible>
+    { pass && <Alert className="mt-3" variant="danger" onClose={()=> setPass(false)} dismissible>
       <Alert.Heading>Oh snap! You didn't enter a valid email or password!</Alert.Heading>
       <p>
         Please enter a valid email and password. Thanks!
       </p>
           </Alert>}
           
-    { strLength && <Alert variant="danger" onClose={()=> setStrLength(false)} dismissible>
+    { strLength && <Alert className="mt-3" variant="danger" onClose={()=> setStrLength(false)} dismissible>
       <Alert.Heading>Oh snap! Short email and or password!</Alert.Heading>
       <p>
         Please enter email and password that are at least 8 characters in length!
       </p>
-    </Alert>}
-    
-    { authenticated && <Alert variant="success">
-      <Alert.Heading>You are logged in!</Alert.Heading>
+          </Alert>}
+          
+    { pwMatch && <Alert className="mt-3" variant="danger" onClose={()=> setPwMatch(false)} dismissible>
+      <Alert.Heading>Oh snap! Both your password and repeat password must match!</Alert.Heading>
       <p>
-        Feel free to browse this website.
+        Please ensure both the password and the repeat passwords match!
       </p>
-    </Alert> }
+    </Alert>}
 
 </div>
   );

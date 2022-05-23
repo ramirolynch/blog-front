@@ -10,6 +10,7 @@ import { PostList } from './Components/PostList';
 import { SinglePost } from './Components/SinglePost';
 import { Navigation } from './Components/Navigation';
 import { PostForm } from './Components/PostForm';
+import { SignUp } from './Components/SignUp';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
       
         <Route path="/posts/:id" element={<SinglePost />}></Route>
         <Route path='/post' element={<PostForm />}></Route>
+        <Route path='/signup' element={<SignUp />}></Route>
   
       </Routes>
       

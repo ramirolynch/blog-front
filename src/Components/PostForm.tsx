@@ -12,7 +12,7 @@ export function PostForm() {
     const bodyField = useRef<any>("");
     const [show, setShow] = useState(false);
     const [blogPosted, setBlogPosted] = useState(false);
-    const { authenticated, loginUser } = useContext(BlogContext);
+    const { user_id } = useContext(BlogContext);
     let location : any = useLocation();
     let from = location.state?.from?.pathname || "/";
     let navigate = useNavigate();
@@ -27,7 +27,7 @@ export function PostForm() {
             setShow(true);
         } 
         else {
-            postBlog(titleField.current.value, bodyField.current.value)
+            postBlog(titleField.current.value, bodyField.current.value, user_id);
             setBlogPosted(true);
 
         }
