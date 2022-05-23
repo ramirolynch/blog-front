@@ -1,6 +1,20 @@
+import { useContext } from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { BlogContext } from "../Context/BlogContext";
 
 export function Navigation() {
+
+  let { logoutUser } = useContext(BlogContext);
+  const navigate = useNavigate();
+
+
+  function handleClick (){
+
+    logoutUser();
+    navigate('/');  
+      
+  }
     
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -12,6 +26,7 @@ export function Navigation() {
             <Nav.Link href="post">Post</Nav.Link>
             <Nav.Link href="login">Login</Nav.Link>
             <Nav.Link href="signup">Sign Up</Nav.Link>
+            <Nav.Link onClick={handleClick} href="signup">Log Out</Nav.Link>
             <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
