@@ -5,7 +5,7 @@ import { BlogContext } from "../Context/BlogContext";
 
 export function Navigation() {
 
-  let { logoutUser } = useContext(BlogContext);
+  let { logoutUser, authenticated } = useContext(BlogContext);
   const navigate = useNavigate();
 
 
@@ -23,10 +23,10 @@ export function Navigation() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="post">Post</Nav.Link>
-            <Nav.Link href="login">Login</Nav.Link>
+            {authenticated && <Nav.Link href="post">Post</Nav.Link>}
+            {!authenticated && <Nav.Link href="login">Login</Nav.Link>}
             <Nav.Link href="signup">Sign Up</Nav.Link>
-            <Nav.Link onClick={handleClick} href="signup">Log Out</Nav.Link>
+            {authenticated && <Nav.Link onClick={handleClick} href="signup">Log Out</Nav.Link>}
             <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
