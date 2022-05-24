@@ -2,10 +2,13 @@ import { Card, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { BlogPost } from "../Models/UserModel";
 import moment from "moment";
+import { BlogContext } from "../Context/BlogContext";
+import { useContext } from "react";
 
 export function Post(props: { elem: BlogPost }) {
 
     let navigate = useNavigate();
+    let { user_id } = useContext(BlogContext);
 
     return (
         <div>
@@ -21,6 +24,10 @@ export function Post(props: { elem: BlogPost }) {
                     </Card.Text>
                     <Button variant="primary" onClick={()=>{navigate(`posts/${props.elem.id}`)}}>Go to post</Button>
                 </Card.Body>
+                <Card.Text>
+                    {user_id === props.elem.author_id ? <p>I am the author</p> : <p>I am not the author</p>}
+                </Card.Text>
+
             </Card>
         </div>
         
