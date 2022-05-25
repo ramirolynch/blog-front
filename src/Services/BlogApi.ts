@@ -44,6 +44,13 @@ export function postComment(body: string, author_id: number, post_id: number) {
     .catch((error) => console.log(error.response.data));
 }
 
+// delete a post by its id
+export function deletePost(id: number) {
+  return axios
+    .delete(`http://localhost:3000/posts/${id}`, {})
+    .then((response) => response.data);
+}
+
 export function logInDB(email: string, password: string) {
   return axios
     .post(`http://localhost:3000/login`, {

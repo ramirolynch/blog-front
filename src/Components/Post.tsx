@@ -4,11 +4,18 @@ import { BlogPost } from "../Models/UserModel";
 import moment from "moment";
 import { BlogContext } from "../Context/BlogContext";
 import { useContext } from "react";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { deletePost } from "../Services/BlogApi";
+
 
 export function Post(props: { elem: BlogPost }) {
 
     let navigate = useNavigate();
     let { user_id } = useContext(BlogContext);
+
+    function handleClick(id: number) {
+        deletePost(id); 
+    }
 
     return (
         <div>
@@ -22,12 +29,12 @@ export function Post(props: { elem: BlogPost }) {
                     <Card.Text>
                     posted by {props.elem.first_name} {props.elem.last_name}
                     </Card.Text>
+                    <Card.Text>
+                    {user_id === props.elem.author_id && <RiDeleteBin6Line onClick={()=>handleClick(props.elem.id)} /> }
+                    </Card.Text>
                     <Button variant="primary" onClick={()=>{navigate(`posts/${props.elem.id}`)}}>Go to post</Button>
                 </Card.Body>
-                <Card.Text>
-                    {user_id === props.elem.author_id ? <p>I am the author</p> : <p>I am not the author</p>}
-                </Card.Text>
-
+  
             </Card>
         </div>
         

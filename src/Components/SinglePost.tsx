@@ -6,6 +6,8 @@ import { BlogPost, CommentFace } from "../Models/UserModel";
 import { fetchComments, fetchPost } from "../Services/BlogApi";
 import { Comment } from "./Comment";
 import { CommentForm } from "./CommentForm";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { deletePost } from "../Services/BlogApi";
 
 
 export function SinglePost() {
@@ -13,7 +15,7 @@ export function SinglePost() {
     const [onePost, setOnePost] = useState<BlogPost>();
     const [comments, setComments] = useState<CommentFace[]>([]);
 
-    let { id } = useParams();
+    let { id, user_id } = useParams();
 
 
     useEffect(() => {
@@ -21,6 +23,10 @@ export function SinglePost() {
         fetchComments((Number(id))).then((response) => setComments(response))
         
     }, [onePost, comments]);
+
+    function handleClick(id: any) {
+        deletePost(id); 
+    }
 
     return (
         <div>
