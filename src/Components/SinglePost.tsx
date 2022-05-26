@@ -43,9 +43,9 @@ export function SinglePost() {
                 {onePost?.author_id === Number(localStorage.getItem('userId')) && <Button variant="danger" onClick={() => { handleClick() }}>Delete post</Button>}
             </Card>
             
-            {onePost && <CommentForm elem={onePost}></CommentForm>}
+            {onePost && user_id && <CommentForm elem={onePost}></CommentForm>}
 
-            {comments.length > 0 ? comments.map((elem, i) => <Comment key={i} elem={elem}></Comment>) : <h3>Enter a new comment.</h3>}
+            {comments.length > 0 && comments.map((elem, i) => <Comment key={i} elem={elem}></Comment>)}
         </div>
         
     );

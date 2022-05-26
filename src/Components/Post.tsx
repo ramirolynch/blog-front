@@ -19,7 +19,7 @@ export function Post(props: { elem: BlogPost }) {
 
     return (
         <div>
-            <Card className="mt-3">
+            <Card className="mt-3 mb-3">
                 <Card.Header as="h5">{moment(props.elem.post_ts).format("MMM Do YY")}</Card.Header>
                 <Card.Body>
                     <Card.Title>{props.elem.title}</Card.Title>

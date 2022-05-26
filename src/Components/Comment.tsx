@@ -6,7 +6,7 @@ import { CommentFace } from "../Models/UserModel";
 export function Comment(props:{elem:CommentFace}) {
     return (
         <div>
-            <Card className="mt-3">
+            <Card className="mt-3 mb-3">
                 <Card.Header>{moment(props.elem.comment_ts).format("MMM Do YY")}</Card.Header>
                     <Card.Body>
                         <blockquote className="blockquote mb-0">
