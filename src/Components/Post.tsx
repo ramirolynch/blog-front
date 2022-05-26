@@ -29,9 +29,6 @@ export function Post(props: { elem: BlogPost }) {
                     <Card.Text>
                     posted by {props.elem.first_name} {props.elem.last_name}
                     </Card.Text>
-                    <Card.Text>
-                    {user_id === props.elem.author_id && <RiDeleteBin6Line onClick={()=>handleClick(props.elem.id)} /> }
-                    </Card.Text>
                     <Button variant="primary" onClick={()=>{navigate(`posts/${props.elem.id}`)}}>Go to post</Button>
                 </Card.Body>
   

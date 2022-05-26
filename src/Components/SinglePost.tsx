@@ -14,6 +14,7 @@ export function SinglePost() {
 
     const [onePost, setOnePost] = useState<BlogPost>();
     const [comments, setComments] = useState<CommentFace[]>([]);
+    const [fetchedPost, setFetchedPost] = useState<BlogPost>();
 
     let { id, user_id } = useParams();
 
@@ -24,8 +25,9 @@ export function SinglePost() {
         
     }, [onePost, comments]);
 
-    function handleClick(id: any) {
-        deletePost(id); 
+    function handleClick() {
+        console.log(user_id)
+        deletePost(Number(onePost?.id))
     }
 
     return (
@@ -38,6 +40,7 @@ export function SinglePost() {
                         {onePost?.body}
                     </Card.Text>
                 </Card.Body>
+                {onePost?.author_id === Number(localStorage.getItem('userId')) && <Button variant="danger" onClick={() => { handleClick() }}>Delete post</Button>}
             </Card>
             
             {onePost && <CommentForm elem={onePost}></CommentForm>}
