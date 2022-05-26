@@ -8,6 +8,7 @@ import { Comment } from "./Comment";
 import { CommentForm } from "./CommentForm";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { deletePost } from "../Services/BlogApi";
+import { PostForm } from "./PostForm";
 
 
 export function SinglePost() {
@@ -15,6 +16,7 @@ export function SinglePost() {
     const [onePost, setOnePost] = useState<BlogPost>();
     const [comments, setComments] = useState<CommentFace[]>([]);
     const [fetchedPost, setFetchedPost] = useState<BlogPost>();
+    const [displayForm, setDisplayForm] = useState<boolean>(false);
 
     let { id, user_id } = useParams();
 
@@ -29,6 +31,14 @@ export function SinglePost() {
         console.log(user_id)
         deletePost(Number(onePost?.id))
     }
+    function handleEdit() {
+        if (displayForm === false) {
+            setDisplayForm(true)
+        } else {
+            setDisplayForm(false)
+        }
+        
+    }
 
     return (
         <div>
@@ -41,7 +51,10 @@ export function SinglePost() {
                     </Card.Text>
                 </Card.Body>
                 {onePost?.author_id === Number(localStorage.getItem('userId')) && <Button variant="danger" onClick={() => { handleClick() }}>Delete post</Button>}
+                {onePost?.author_id === Number(localStorage.getItem('userId')) && <Button variant="warning" onClick={() => { handleEdit() }}>Edit post</Button>}
             </Card>
+
+            {displayForm && <PostForm></PostForm>}
             
             {onePost && user_id && <CommentForm elem={onePost}></CommentForm>}
 
@@ -49,4 +62,8 @@ export function SinglePost() {
         </div>
         
     );
+}
+
+function editPost() {
+    throw new Error("Function not implemented.");
 }

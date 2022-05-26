@@ -18,7 +18,7 @@ export function fetchComments(id: number) {
     .then((response) => response.data);
 }
 
-export function postBlog(title: string, body: number, author_id: number) {
+export function postBlog(title: string, body: string, author_id: number) {
   let blogpost = {
     ...(title !== "" && { title: title }),
     ...{ body: body },
@@ -28,6 +28,16 @@ export function postBlog(title: string, body: number, author_id: number) {
     .post(`http://localhost:3000/posts`, blogpost)
     .then((response) => response.data)
     .catch((error) => console.log(error.response.data));
+}
+
+// edit blog post
+export function editBlog(id: number, title: string, body: string) {
+  return axios
+    .put(`http://localhost:3000/posts/${id}`, {
+      title: title,
+      body: body,
+    })
+    .then((response) => response.data);
 }
 
 // post a comment under a post
