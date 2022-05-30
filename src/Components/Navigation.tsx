@@ -19,7 +19,7 @@ export function Navigation() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container style={{paddingLeft:"1em", marginLeft:0}}>
-        <Navbar.Brand href="/">Export Controls Blog</Navbar.Brand>
+        <Navbar.Brand href="/">Java Notes</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
