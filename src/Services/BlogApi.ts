@@ -2,19 +2,19 @@ import axios from "axios";
 
 export function fetchPosts() {
   return axios
-    .get(`http://localhost:3000/posts`)
+    .get(`https://blog-alpha-rosy-82.vercel.app/posts`)
     .then((response) => response.data);
 }
 
 export function fetchPost(id: number) {
   return axios
-    .get(`http://localhost:3000/posts/${id}`, {})
+    .get(`https://blog-alpha-rosy-82.vercel.app/posts/${id}`, {})
     .then((response) => response.data);
 }
 
 export function fetchComments(id: number) {
   return axios
-    .get(`http://localhost:3000/posts/${id}/comments`, {})
+    .get(`https://blog-alpha-rosy-82.vercel.app/posts/${id}/comments`, {})
     .then((response) => response.data);
 }
 
@@ -25,7 +25,7 @@ export function postBlog(title: string, body: string, author_id: number) {
     ...{ author_id: author_id },
   };
   return axios
-    .post(`http://localhost:3000/posts`, blogpost)
+    .post(`https://blog-alpha-rosy-82.vercel.app/posts`, blogpost)
     .then((response) => response.data)
     .catch((error) => console.log(error.response.data));
 }
@@ -33,7 +33,7 @@ export function postBlog(title: string, body: string, author_id: number) {
 // edit blog post
 export function editBlog(id: number, title: string, body: string) {
   return axios
-    .put(`http://localhost:3000/posts/${id}`, {
+    .put(`https://blog-alpha-rosy-82.vercel.app/posts/${id}`, {
       title: title,
       body: body,
     })
@@ -49,7 +49,10 @@ export function postComment(body: string, author_id: number, post_id: number) {
     ...{ post_id: post_id },
   };
   return axios
-    .post(`http://localhost:3000/posts/${post_id}/comments`, comment)
+    .post(
+      `https://blog-alpha-rosy-82.vercel.app/posts/${post_id}/comments`,
+      comment
+    )
     .then((response) => response.data)
     .catch((error) => console.log(error.response.data));
 }
@@ -57,13 +60,13 @@ export function postComment(body: string, author_id: number, post_id: number) {
 // delete a post by its id
 export function deletePost(id: number) {
   return axios
-    .delete(`http://localhost:3000/posts/${id}`, {})
+    .delete(`https://blog-alpha-rosy-82.vercel.app/posts/${id}`, {})
     .then((response) => response.data);
 }
 
 export function logInDB(email: string, password: string) {
   return axios
-    .post(`http://localhost:3000/login`, {
+    .post(`https://blog-alpha-rosy-82.vercel.app/login`, {
       email: email,
       password: password,
     })
@@ -77,7 +80,7 @@ export function signUpDB(
   password: string
 ) {
   return axios
-    .post(`http://localhost:3000/signup`, {
+    .post(`https://blog-alpha-rosy-82.vercel.app/signup`, {
       first_name: first_name,
       last_name: last_name,
       email: email,
