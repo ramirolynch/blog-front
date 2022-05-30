@@ -24,10 +24,10 @@ export function Navigation() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            {authenticated && <Nav.Link href="post">Post</Nav.Link>}
-            {!authenticated && <Nav.Link href="login">Login</Nav.Link>}
-            <Nav.Link href="signup">Sign Up</Nav.Link>
-            {authenticated && <Nav.Link onClick={handleClick} href="signup">Log Out</Nav.Link>}
+            {authenticated && <Nav.Link href="/post">Post</Nav.Link>}
+            {!authenticated && <Nav.Link href="/login">Login</Nav.Link>}
+            <Nav.Link href="/signup">Sign Up</Nav.Link>
+            {authenticated && <Nav.Link onClick={handleClick}>Log Out</Nav.Link>}
           </Nav>
         </Navbar.Collapse>
       </Container>
