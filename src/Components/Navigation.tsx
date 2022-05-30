@@ -12,6 +12,7 @@ export function Navigation() {
   function handleClick (){
 
     logoutUser();
+    localStorage.removeItem('userLogin');
     navigate('/');  
       
   }
